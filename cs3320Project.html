@@ -4,6 +4,21 @@
 <title>CS3320-Project</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+function applyActiveCss(id){
+	for (var i = 0; i < document.links.length; i++) {
+	    if (document.links[i].id == id) {
+	        document.links[i].className = 'active';
+	    }
+	    else {
+	    	document.links[i].className = 'links';
+	    }
+	}
+}
+</script>
+
 <style>
 * {
   box-sizing: border-box;
@@ -25,7 +40,7 @@ header {
 /* Create two columns/boxes that floats next to each other */
 nav {
   float: left;
-  width: 30%;
+  width: 20%;
   height: 300px; /* only for demonstration, should be removed */
   background: #ccc;
   padding: 20px;
@@ -40,7 +55,7 @@ nav ul {
 article {
   float: left;
   padding: 20px;
-  width: 70%;
+  width: 80%;
   background-color: #f1f1f1;
   height: 300px; /* only for demonstration, should be removed */
 }
@@ -73,11 +88,23 @@ footer {
 	padding: 0;
 	border: none;
 } 
+
 a{
 	text-decoration: none;
 	color: #333;
 }
+
+/* mouse over link */
+a:hover {
+  color: blue;
+}
+
+.links {
+  color: black;
+}
+
 </style>
+
 </head>
 <body>
 
@@ -87,12 +114,12 @@ a{
 
 <section>
   <nav>
-    <ul>
-      <li><a href="userInfo.html" target="contentFrame">User Information</a></li>
-      <li><a href="shoppingCart.html" target="contentFrame">Shopping Cart</a></li>
-      <li><a href="#">Shipping Info</a></li>
-      <li><a href="#">Payment Info</a></li>
-      <li><a href="#">Order Confirmation</a></li>
+    <ul id="navig">
+      <li><a href="userInfo.html" target="contentFrame" onclick="applyActiveCss(this.id);" id="userInfo">User Information</a></li>
+      <li><a href="shoppingCart.html" target="contentFrame" onclick="applyActiveCss(this.id);" id="cart">Shopping Cart</a></li>
+      <li><a href="#" onclick="applyActiveCss(this.id);" id="ship">Shipping Info</a></li>
+      <li><a href="#" onclick="applyActiveCss(this.id);" id="payment">Payment Info</a></li>
+      <li><a href="#" onclick="applyActiveCss(this.id);" id="order">Order Confirmation</a></li>
     </ul>
   </nav>
   
@@ -102,7 +129,7 @@ a{
 </section>
 
 <footer>
-  <p>Footer</p>
+  <p>My Footer</p>
 </footer>
 
 </body>
