@@ -1,0 +1,153 @@
+<html>
+
+<head>
+	<title>CS3320 - Example</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	function validateForm(){
+		//document.getElementById("myMessages").innerHTML = "You information is successfully submitted!";
+		$("#myMessages").text("You information is successfully submitted!");
+		return true;
+	}
+	
+/* 	$(form).on('submit', function() { 
+		$("#myMessages").text("You information is successfully submitted!");
+	}); */
+	
+	
+/* 	$(document).ready(function(){
+		$("#fullName").click(function(){alert("Hi")});
+	}); */
+
+// AJAX code
+function loadDoc() {
+  	var xhttp = new XMLHttpRequest();
+  	xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) { // requires server
+   //if (this.readyState == 4) {
+      document.getElementById("ajaxDemo").value = this.responseText;
+    }
+  };
+  xhttp.open("GET", "ajaxContent.txt", true);
+  xhttp.send(); 
+}
+
+function showStates() {
+
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            	var obj = eval(this.responseText);
+            	var x = document.getElementById("stateDD");
+            	
+                for (i = 0; i < obj.length; i++) {
+                	  var option = document.createElement("option");
+                	  option.value = obj[i].stateCode;
+                	  option.text = obj[i].stateName;
+                	  x.add(option, x[i]);
+                	}
+            }
+        };
+        xmlhttp.open("GET","getstates.php",true);
+        xmlhttp.send();
+   
+}
+	
+	</script>
+	
+	<style type="text/css">
+		h2 {
+			color:white;
+			background-color: darkblue;
+			font-family: sans-serif;
+			font-size: 14px;
+			height: 25px;
+			text-align: justify;
+			}
+		.label {
+			color:white;
+			background-color: #888;
+			font-family: sans-serif;
+			font-size: .6em;
+			font-weight:bold;
+			text-align:right;
+			width: 80pt;
+		}
+		td {
+			padding:0;
+			
+			border: 0;
+		}
+		input {
+			color:black;
+			background-color: #ddd;
+			font-family: sans-serif;
+			font-size: 14px;
+		}
+	</style>
+</head>
+
+<body onload="showStates()"">
+<h2>User Information</h2>
+	<form action="insert.php" id="myForm" method="post">
+		<table>
+			<tr>
+				<td class="label">First Name:</td>
+				<td><input type="text" name="fName" required="required" title='Please Enter First Name'></td>
+			</tr>
+			<tr>
+				<td class="label">Last Name:</td>
+				<td><input type="text" name="lName" required="required" title='Please Enter Last Name'></td>
+			</tr>
+			<tr>
+				<td class="label">Address 1:</td>
+				<td><input type="text" name="address1" title='Please Enter Address 1'></td>
+			</tr>
+			<tr>
+				<td class="label">Address 2:</td>
+				<td><input type="text" name="address2"></td>
+			</tr>
+			<tr>
+				<td class="label">City:</td>
+				<td><input type="text" name="city"></td>
+			</tr>
+			<tr>
+				<td class="label">State:</td>
+				<td>
+					<select type="text" id = "stateDD" name="state">
+					<select>
+				</td>
+			</tr>
+			<tr>
+				<td class="label">Zip:</td>
+				<td><input type="text" pattern="(\d{5}([\-]\d{4})?)" name="zip" title="5 or 9 digit zip code"></td>
+			</tr>
+			<tr>
+				<td class="label">E-mail:</td>
+				<td><input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title='Please Enter valid email.'></td>
+			</tr>
+			<tr>
+				<td class="label">Notes:</td>
+				<td><textarea name="ajaxDemo" id="ajaxDemo" rows="4" title='Ajax notes' onclick="loadDoc()"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" title='Click here to submit.'></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2"><span id="myMessages" style="color:green;"></span>
+				</td>
+			</tr>
+			
+			
+		</table>
+	</form>
+</body>
+
+</html>
